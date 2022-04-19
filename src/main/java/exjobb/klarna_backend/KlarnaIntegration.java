@@ -1,11 +1,16 @@
 package exjobb.klarna_backend;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -13,19 +18,25 @@ public class KlarnaIntegration {
     private final WebClient webClient;
 
     public KlarnaIntegration (){
-        this.webClient = WebClient.create("https://api.playground.klarna.com");
+        Dotenv dotenv;
+        dotenv = Dotenv.configure().load();
+        this.webClient = WebClient.builder()
+                .baseUrl("https://api.playground.klarna.com")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Basic " + Base64.getEncoder().encodeToString(dotenv.get("CREDENTIALS").getBytes()))
+                .build();
     }
     public Mono<String> createOrder(Object req) {
         return this.webClient.post().uri("/checkout/v3/orders/")
-                .header("Authorization","Basic "+System.getenv("credentials"))
                 .bodyValue(req)
-                .retrieve().bodyToMono(String.class);
+                .retrieve()
+                .bodyToMono(String.class);
     }
 
     public Mono<String> fetchOrder(String orderId) {
         return this.webClient.get()
                 .uri("/checkout/v3/orders/" + orderId)
-                .header("Authorization","Basic UEs1NTAyMF81ZTQ0MTZhZWU1M2M6Q2MwcEdYYmdlVkk4NmZkUw==")
-                .retrieve().bodyToMono(String.class);
+                .retrieve()
+                .bodyToMono(String.class);
     }
 }
