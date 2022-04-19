@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class KlarnaIntegration {
@@ -39,4 +40,12 @@ public class KlarnaIntegration {
                 .retrieve()
                 .bodyToMono(String.class);
     }
+
+    public Mono<Map> getOrder(String orderId) {
+        return this.webClient.get()
+                .uri("/checkout/v3/orders/" + orderId)
+                .retrieve()
+                .bodyToMono(Map.class);
+    }
 }
+

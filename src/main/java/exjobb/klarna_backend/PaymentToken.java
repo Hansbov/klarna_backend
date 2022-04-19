@@ -14,11 +14,11 @@ public class PaymentToken {
     private Date paymentDate;
 
 
-    PaymentToken() {
+    public PaymentToken() {
 
     }
 
-    PaymentToken(String customerToken, Date paymentDate){
+    public PaymentToken(String customerToken, Date paymentDate){
         this.customerToken=customerToken;
         this.paymentDate=paymentDate;
     }
