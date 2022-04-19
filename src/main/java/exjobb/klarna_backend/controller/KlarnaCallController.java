@@ -1,38 +1,25 @@
 package exjobb.klarna_backend.controller;
 
 import exjobb.klarna_backend.KlarnaIntegration;
-import org.springframework.web.bind.annotation.RestController;
-import exjobb.klarna_backend.PaymentToken;
-import exjobb.klarna_backend.PaymentTokenNotFoundException;
-import exjobb.klarna_backend.PaymentTokenRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.hateoas.*;
-
-import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class KlarnaCallController {
-
+    KlarnaIntegration klarnaIntegration;
     KlarnaCallController(){
-
+        this.klarnaIntegration = new KlarnaIntegration();
     }
     @PostMapping("/order")
-    Object newOrder(@RequestBody Object req){
-        Object order = KlarnaIntegration.createOrder(req);
-        return order;
+    public  @ResponseBody Mono<String> newOrder(@RequestBody JSONObject req){
+        return this.klarnaIntegration.createOrder(req);
     }
 
-    @GetMapping("/order/{order_id}")
-    Object getOrder(){
-           return new Object();
+    @GetMapping("/order/{orderId}")
+    public @ResponseBody Mono<String> getOrder(@PathVariable(value="orderId") String id){
+        return this.klarnaIntegration.fetchOrder(id);
     }
 
 }
