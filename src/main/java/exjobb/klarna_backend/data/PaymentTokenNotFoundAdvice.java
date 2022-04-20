@@ -1,4 +1,4 @@
-package exjobb.klarna_backend;
+package exjobb.klarna_backend.data;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

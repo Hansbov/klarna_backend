@@ -1,17 +1,15 @@
 package exjobb.klarna_backend.controller;
 
-import exjobb.klarna_backend.KlarnaIntegration;
+import exjobb.klarna_backend.services.KlarnaIntegration;
 //import net.minidev.json.JSONObject;
-import exjobb.klarna_backend.PaymentToken;
-import exjobb.klarna_backend.PaymentTokenRepository;
+import exjobb.klarna_backend.data.PaymentToken;
+import exjobb.klarna_backend.data.PaymentTokenRepository;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import org.json.JSONObject;
 import java.sql.Date;
-import org.json.JSONException;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 @CrossOrigin(origins = "https://localhost:3000")
 @RestController

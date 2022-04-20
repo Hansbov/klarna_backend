@@ -4,9 +4,9 @@ package exjobb.klarna_backend.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import exjobb.klarna_backend.PaymentToken;
-import exjobb.klarna_backend.PaymentTokenNotFoundException;
-import exjobb.klarna_backend.PaymentTokenRepository;
+import exjobb.klarna_backend.data.PaymentToken;
+import exjobb.klarna_backend.data.PaymentTokenNotFoundException;
+import exjobb.klarna_backend.data.PaymentTokenRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

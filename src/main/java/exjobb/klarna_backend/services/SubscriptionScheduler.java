@@ -1,18 +1,20 @@
-package exjobb.klarna_backend;
+package exjobb.klarna_backend.services;
 
 
+import exjobb.klarna_backend.data.PaymentToken;
+import exjobb.klarna_backend.data.PaymentTokenRepository;
 import net.minidev.json.JSONArray;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.minidev.json.JSONObject;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-@Component
+@Service
 public class SubscriptionScheduler {
 
     private static final Logger logger = LoggerFactory.getLogger(SubscriptionScheduler.class);

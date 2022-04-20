@@ -1,4 +1,4 @@
-package exjobb.klarna_backend;
+package exjobb.klarna_backend.data;
 
 
 public class PaymentTokenNotFoundException extends RuntimeException {

@@ -1,4 +1,4 @@
-package exjobb.klarna_backend;
+package exjobb.klarna_backend.data;
 
 import java.sql.Date;
 import java.util.Objects;

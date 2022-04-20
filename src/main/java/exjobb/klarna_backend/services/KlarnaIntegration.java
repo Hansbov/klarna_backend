@@ -1,4 +1,4 @@
-package exjobb.klarna_backend;
+package exjobb.klarna_backend.services;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.http.HttpHeaders;
