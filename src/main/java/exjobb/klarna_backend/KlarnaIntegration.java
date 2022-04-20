@@ -2,6 +2,7 @@ package exjobb.klarna_backend;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpRequest;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,15 @@ public class KlarnaIntegration {
         return this.webClient.get()
                 .uri("/checkout/v3/orders/" + orderId)
                 .retrieve()
+                .bodyToMono(String.class);
+    }
+
+    public Mono<String> createOrderByToken(String token, Object body) throws Exception{
+        return  this.webClient.post()
+                .uri("/customer-token/v1/tokens/"+token+"/order")
+                .bodyValue(body)
+                .retrieve()
+                .onStatus( HttpStatus::isError, clientResponse -> clientResponse.bodyToMono(String.class).map(Exception::new))
                 .bodyToMono(String.class);
     }
 
