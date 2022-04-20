@@ -45,7 +45,7 @@ public class KlarnaCallController {
             JSONObject json = new JSONObject(result);
             paymentToken.setCustomerToken(json.getString("recurring_token"));
             LocalDate today = LocalDate.now();
-            LocalDate date = today;//.plusMonths(1);
+            LocalDate date = today.plusMonths(1);
             paymentToken.setPaymentDate(Date.valueOf(date));
 
             repository.save(paymentToken);
